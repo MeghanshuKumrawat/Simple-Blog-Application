@@ -1,0 +1,53 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'components/navbar.html' %}
+
+<main class="main pt-4">
+
+  <div class="container">
+    {% include 'components/alert.html' %}
+
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+
+        <article class="card mb-4">
+          <header class="card-header text-center">
+            <h1 class="card-title">Write your knowledge...</h1>
+          </header>
+          <div class="card-body">
+            <form method="post" enctype="multipart/form-data">{% csrf_token %}
+              <b>{{ form.title.label }}</b>
+              {{ form.title }}
+              <b>{{ form.content.label }}</b>
+              {{ form.content }}
+              <b>{{ form.image.label }}</b>
+              {{ form.image }}
+              <b>{{ form.tags.label }}</b>
+              <div class="row">
+                {% for tag in form.tags %}
+                <div class="col-3">
+                  {{ tag }}
+                </div>
+                {% endfor %}
+              </div>
+              {% if flag %}
+              <button type="submit" class="btn btn-success mt-2">Create</button>
+              {% else %}
+              <button type="submit" class="btn btn-success mt-2">Update</button>
+              {% endif %}
+            </form>
+
+          </div>
+        </article><!-- /.card -->
+
+      </div>
+    </div>
+  </div>
+
+</main>
+
+{% include 'components/footer.html' %}
+
+{% endblock content %}

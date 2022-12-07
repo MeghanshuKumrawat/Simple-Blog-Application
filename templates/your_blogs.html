@@ -1,0 +1,48 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'components/navbar.html' %}
+
+<main class="main pt-4">
+
+  <div class="container">
+    {% include 'components/alert.html' %}
+
+    <div class="row">
+      {% for blog in blogs %}
+      <div class="col-md-4">
+        <article class="card mb-4">
+          <header class="card-header">
+            <div class="card-meta">
+              <a href="{% url 'single-blog-view' blog.pk %}"><time class="timeago" datetime="{{ blog.timestamp }}">{{
+                  blog.timestamp }}</time></a> in <a href="{% url 'single-blog-view' blog.pk %}"></a>
+            </div>
+            <a href="{% url 'single-blog-view' blog.pk %}">
+              <h4 class="card-title">{{ blog.title }}</h4>
+            </a>
+          </header>
+          <a href="{% url 'single-blog-view' blog.pk %}">
+            <img class="card-img" src="{{ blog.image.url }}" alt="" />
+          </a>
+          <div class="card-body">
+            <p class="card-text">{{ blog.content|slice:":300" }}</p>
+          </div>
+        </article><!-- /.card -->
+      </div>
+      {% empty %}
+
+      <h4 class="card-title  text-center m-5">You haven't written any blog yet.</h4>
+      <h2 class="card-title text-center m-5">Share knowledge with others by blogging <a href="{% url 'create-blog-view' %}">here...</a> </h2>
+
+      {% endfor %}
+
+    </div>
+  </div>
+  </div>
+
+</main>
+
+{% include 'components/footer.html' %}
+
+{% endblock content %}

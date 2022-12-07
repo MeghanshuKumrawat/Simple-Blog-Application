@@ -1,0 +1,36 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'components/navbar.html' %}
+
+<main class="main pt-4">
+
+  <div class="container">
+    {% include 'components/alert.html' %}
+
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+
+        <article class="card mb-4">
+          <header class="card-header text-center">
+            <h1 class="card-title">Sign Up here</h1>
+          </header>
+          <div class="card-body">
+            <form method="post">{% csrf_token %}
+              {{ form }}
+              <button type="submit" class="btn btn-success">Sign Up</button>
+            </form>
+
+          </div>
+        </article><!-- /.card -->
+
+      </div>
+    </div>
+  </div>
+
+</main>
+
+{% include 'components/footer.html' %}
+
+{% endblock content %}
